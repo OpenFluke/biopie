@@ -1,0 +1,20 @@
+---
+- name: Update Raspberry Pis and Install Required Packages
+  hosts: raspberry_pis
+  become: true # Run tasks as sudo
+  tasks:
+    - name: Update package lists
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      apt:
+        upgrade: yes
+
+    - name: Install Podman, Podman Compose, and Unzip
+      apt:
+        name:
+          - podman
+          - podman-compose
+          - unzip
+        state: present

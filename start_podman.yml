@@ -1,0 +1,16 @@
+---
+- name: Start BioFoundry Podman Containers
+  hosts: raspberry_pis
+  tasks:
+    - name: Ensure the BioFoundry directory exists
+      file:
+        path: /home/open/BioFoundry
+        state: directory
+        owner: open
+        group: open
+        mode: "0755"
+
+    - name: Start Podman containers
+      command: podman-compose up -d
+      args:
+        chdir: /home/open/BioFoundry

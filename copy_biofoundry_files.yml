@@ -1,0 +1,21 @@
+---
+- name: Copy BioFoundry files to Raspberry Pis
+  hosts: raspberry_pis
+  tasks:
+    - name: Ensure BioFoundry directory exists
+      file:
+        path: /home/open/BioFoundry
+        state: directory
+        mode: "0755"
+
+    - name: Copy podman-compose.yml to the Pis
+      copy:
+        src: podman-compose.yml
+        dest: /home/open/BioFoundry/podman-compose.yml
+        mode: "0644"
+
+    - name: Copy game zip to the Pis
+      copy:
+        src: linux-arm64-alpha-0_9_0.zip
+        dest: /home/open/BioFoundry/linux-arm64-alpha-0_9_0.zip
+        mode: "0644"

@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  biofoundry:
+    image: debian:bookworm
+    container_name: biofoundry
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./linux-arm64-alpha-0_9_0.zip:/tmp/game.zip
+      - ./linux_arm64:/app/linux_arm64
+    command: >
+      sh -c "apt update &&
+             apt install -y unzip file libstdc++6 libfontconfig1 libx11-6 libwayland-client0 libicu-dev &&
+             unzip -o /tmp/game.zip -d /app &&
+             chmod +x /app/linux_arm64/BioFoundry.arm64 &&
+             file /app/linux_arm64/BioFoundry.arm64 &&
+             ls -lah /app/linux_arm64 &&
+             /app/linux_arm64/BioFoundry.arm64 -headless --headless ./BioFoundry.x86_64 --headless -headless -UDPPort=15000 -TCPPort=16000 -TCPWorkers=14000"
+    network_mode: "host"
