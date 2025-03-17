@@ -80,3 +80,38 @@ ansible-playbook -i inventory.ini start_podman.yml
 ```
 ansible-playbook -i inventory.ini stop_podman.yml
 ```
+
+# Setup running on fedora 41
+
+Download the zip file
+
+```
+wget https://openfluke.com/download-file/linux-alpha-0_9_0.zip
+```
+
+Install podman and podman compose
+
+```
+sudo dnf install podman-compose
+```
+
+```
+sudo dnf install podman
+```
+
+Create podman-compose.yml with this code https://github.com/OpenFluke/biopie/blob/main/podman-compose_x86.yml
+
+Make sure the the zip folder is next to the podman-compose yaml then run
+
+```
+podman-compose up
+```
+
+If all goes well you should see:
+[biofoundry] | 🌍 Planet '(2, 2, 1)' added to grid (2, 2, 1)
+
+[biofoundry] | 🌍 Planet '(2, 2, 2)' added to grid (2, 2, 2)
+
+[biofoundry] | 🟦 Total Cubes: 0
+
+[biofoundry] | 🟦 Total Cubes: 0
